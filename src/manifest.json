@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "theme.js": {
+      "files": [
+        "scripts/theme.js"
+      ]
+    },
+    "plugins.js": {
+      "files": [
+        "bower_components/tether/dist/js/tether.js",
+        "bower_components/bootstrap/dist/js/bootstrap.js"
+      ]
+    },
+    "theme.css": {
+      "files": [
+        "styles/theme.scss"
+      ],
+      "main": true
+    }
+  },
+
+  "config": {
+    "devUrl": "http://localhost/blog"
+  },
+
+  "paths": {
+    "source": "src/",
+    "dist": "assets/"
+  }
+}

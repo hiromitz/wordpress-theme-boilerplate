@@ -1,0 +1,11 @@
+{
+  "name": "wordpress-theme-boilerplate",
+  "description": "Wordpress theme boilerplate with Sass, Gulp and Twitter Bootstrap4.",
+  "license": "MIT",
+  "moduleType": [
+    "es6"
+  ],
+  "dependencies": {
+    "bootstrap": "https://github.com/twbs/bootstrap.git#v4-dev"
+  }
+}
