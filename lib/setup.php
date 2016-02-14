@@ -16,6 +16,12 @@ function setup() {
   // http://codex.wordpress.org/Function_Reference/add_image_size
   add_theme_support('post-thumbnails');
 
+  // Register wp_nav_menu() menus
+  // http://codex.wordpress.org/Function_Reference/register_nav_menus
+  register_nav_menus([
+    'primary_navigation' => 'Primary Navigation',
+  ]);
+
   // Enable post formats
   // http://codex.wordpress.org/Post_Formats
   add_theme_support('post-formats', ['aside', 'gallery', 'link', 'image', 'quote', 'video', 'audio']);
@@ -25,6 +31,44 @@ function setup() {
   add_theme_support('html5', ['caption', 'comment-form', 'comment-list', 'gallery', 'search-form']);
 }
 add_action('after_setup_theme', __NAMESPACE__ . '\\setup');
+
+
+/**
+ * Register sidebars
+ */
+function widgets_init() {
+  register_sidebar([
+    'name'          => 'Primary',
+    'id'            => 'sidebar-primary',
+    'before_widget' => '<section class="sidebar-module widget %1$s %2$s">',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ]);
+  register_sidebar([
+    'name'          => 'Footer',
+    'id'            => 'sidebar-footer',
+    'before_widget' => '<section class="sidebar-module widget %1$s %2$s">',
+    'after_widget'  => '</section>',
+    'before_title'  => '<h4>',
+    'after_title'   => '</h4>'
+  ]);
+}
+add_action('widgets_init', __NAMESPACE__ . '\\widgets_init');
+
+/**
+ * Determine which pages should NOT display the sidebar
+ */
+function display_sidebar() {
+  static $display;
+  isset($display) || $display = !in_array(true, [
+    // The sidebar will NOT be displayed if ANY of the following return true.
+    // @link https://codex.wordpress.org/Conditional_Tags
+    is_404(),
+    is_front_page(),
+  ]);
+  return apply_filters('support/display_sidebar', $display);
+}
 
 /**
  * Theme assets
